@@ -869,6 +869,19 @@ namespace {
             + pieces<WHITE, QUEEN >() - pieces<BLACK, QUEEN >();
 
     score += mobility[WHITE] - mobility[BLACK];
+/*
+    {
+	int mgw = mg_value( mobility[WHITE]); 
+        int mgb = mg_value( mobility[BLACK]);
+	int egw = eg_value( mobility[WHITE]); 
+	int egb = eg_value( mobility[BLACK]);
+	int mgs = (2 * mgw * mgb) / ( mgw + mgb);
+	int egs = (2 * egw * egb) / ( egw + egb);
+	
+	score  += make_score( mgs, egs);
+    }
+*/
+	
 
     score +=  king<   WHITE>() - king<   BLACK>()
             + threats<WHITE>() - threats<BLACK>()
