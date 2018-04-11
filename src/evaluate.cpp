@@ -869,18 +869,20 @@ namespace {
             + pieces<WHITE, QUEEN >() - pieces<BLACK, QUEEN >();
 
     score += mobility[WHITE] - mobility[BLACK];
-/*
+
+//ugly.  unpack mg and eg values, compute "interaction vars", and repack.
+//should go to separate function, but later.
     {
-	int mgw = mg_value( mobility[WHITE]); 
-        int mgb = mg_value( mobility[BLACK]);
-	int egw = eg_value( mobility[WHITE]); 
-	int egb = eg_value( mobility[BLACK]);
-	int mgs = (2 * mgw * mgb) / ( mgw + mgb);
-	int egs = (2 * egw * egb) / ( egw + egb);
+	unsigned int mgw = mg_value( mobility[WHITE]); 
+        unsigned int mgb = mg_value( mobility[BLACK]);
+	unsigned int mgs = ( 0.5 + (2.0 * mgw * mgb) / ( mgw + mgb));
+
+	unsigned int egw = eg_value( mobility[WHITE]); 
+	unsigned int egb = eg_value( mobility[BLACK]);
+	unsigned int egs = ( 0.5 + (2.0 * egw * egb) / ( egw + egb));
 	
-	score  += make_score( mgs, egs);
+	score +=  make_score( mgs, egs);
     }
-*/
 	
 
     score +=  king<   WHITE>() - king<   BLACK>()
